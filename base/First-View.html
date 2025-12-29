@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>XX 0 X 25</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+/* General Reset */
+body {
+      background: black;
+      font-family: 'Poppins', sans-serif;
+      color: #b19cd9;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      padding-left: 80px; /* Memberi ruang untuk sidebar */
+    }
+
+#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+    }
+section {
+  position: relative;
+  z-index: 1; /* pastikan teks/isi ada di atas partikel */
+  padding: 80px 20px;
+  color: white;
+}    
+
+/* SIDEBAR STYLING */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 80px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+}
+
+.sidebar:hover {
+  width: 220px;
+}
+
+.sidebar-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.sidebar .icon {
+  margin-bottom: 10px;
+}
+
+.sidebar .icon i {
+  font-size: 36px;
+  color: #ff69b4;
+  text-shadow: 
+    0 0 10px rgba(255, 21, 0, 0.9),
+    0 0 20px rgba(255, 21, 0, 0.7),
+    0 0 40px rgba(255, 21, 0, 0.5),
+    0 0 80px rgba(255, 21, 0, 0.3);
+}
+
+.sidebar .brand {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar .brand span {
+  color: #ff69b4;
+  text-shadow: 0 0 8px #ff69b4;
+}
+
+.sidebar:hover .brand {
+  opacity: 1;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 20px;
+  width: 100%;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.sidebar-item i {
+  margin-right: 15px;
+  font-size: 20px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.sidebar-item span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .sidebar-item span {
+  opacity: 1;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 105, 180, 0.2);
+  color: #e63946;
+}
+
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  body {
+    padding-left: 0;
+  }
+  
+  .sidebar {
+    width: 0;
+    backdrop-filter: none;
+  }
+  
+  .sidebar.active {
+    width: 220px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .sidebar.active .brand,
+  .sidebar.active .sidebar-item span {
+    opacity: 1;
+  }
+  
+  .sidebar-toggle {
+    display: block;
+  }
+  
+  .sidebar .brand {
+    display: none;
+  }
+  
+  .sidebar.active .brand {
+    display: block;
+  }
+}
+
+/* Hapus navbar lama */
+.navbar {
+  display: none;
+}
+
+/* Welcome Section */
+.welcome {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.welcome h1 {
+  font-size: 48px;    
+  font-weight: bold;     
+  margin-top: 90px;   
+  line-height: 1.2;      
+}
+
+.welcome .cursor {
+  display: inline-block;
+  width: 10px;
+  height: 40px;
+  background-color: white;
+  margin-left: 3px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+#subtext {
+  font-size: 18px;
+  opacity: 0;
+  margin-top: 10px;
+  transition: opacity 1s ease;
+}
+
+/* Glow effect after typing */
+.glow {
+  color: #fff;
+  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff1493;
+  animation: pop 0.6s ease forwards;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* About Section */
+#about {
+  padding: 60px 20px;
+  color: white;
+  max-width: 1100px;
+  margin: auto;
+}
+
+#about .container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  /* blur dipindahin ke container */
+  background: rgba(255, 105, 180, 0.04);
+  border: 1px solid rgba(255, 105, 180, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.15);
+  padding: 40px;
+}
+
+  #about h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ff69b4;
+    margin-bottom: 1rem;
+  }
+
+  #about p {
+    color: #d1d1d1;
+    margin-bottom: 1rem;
+  }
+
+  .about-features div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .about-features div i {
+    color: #ff69b4;
+    font-size: 1.2rem;
+  }
+
+  .about-features div:hover {
+  background: rgba(255, 105, 180, 0.15);
+  transform: translateX(5px);
+}
+
+  /* Responsive layout untuk layar besar */
+  @media (min-width: 768px) {
+    #about .container {
+      flex-direction: row; /* sejajar kiri-kanan */
+      align-items: flex-start;
+    }
+    .about-text {
+      flex: 1;
+    }
+    .about-features {
+      flex: 1;
+    }
+  }
+    
+/* Membership Section */
+.membership {
+  color: white;
+  text-align: center;
+  padding: 60px 20px;     /* padding secukupnya, bukan blur */
+}
+
+.membership h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #ff69b4; /* merah */
+}
+
+.plan-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 40px auto;      /* center */
+  
+  /* blur pindah ke sini */
+  background: rgba(255, 105, 180, 0.04);
+  border: 1px solid rgba(255, 105, 180, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.plan:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.04);
+}
+
+.plan h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #ff69b4;
+}
+
+.plan .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 15px 0;
+  color: #fff;
+}
+
+.plan .price span {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.plan ul li {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.plan ul li i {
+  color: #ff69b4;
+  margin-right: 8px;
+}
+
+.plan .btn {
+  display: inline-block;
+  background: #ff69b4; 
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 2px solid #ff85c1; 
+  transition: 0.3s;
+  position: relative;
+}
+
+/* Glow effect */
+.plan .btn::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 12px;
+  border: 2px solid #ff69b4; 
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.plan .btn:hover {
+  background: #ff85c1; 
+  box-shadow: 0 0 12px rgba(255, 102, 102, 0.6);
+}
+
+.plan .btn:hover::after {
+  opacity: 1; 
+}
+
+
+
+/* Contact Section */
+.contact-section {
+  padding: 60px 20px;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;  /* dari row jadi column */
+  gap: 40px;
+  max-width: 1100px;
+  margin: auto;
+  background: rgba(255, 105, 180, 0.04);
+  border: 1px solid rgba(255, 105, 180, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.contact-form {
+  flex: 1;
+}
+
+.contact-form h2 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #ff69b4;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-text {
+  flex: 1;
+  color: white;
+}
+
+.contact-text h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.contact-text p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+ul li {
+  list-style: none;
+  margin: 10px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+ul li i {
+  color: #0088cc; /* warna khas Telegram */
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+ul li a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+ul li a:hover {
+  color: #ff6b6b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+  </style>
+</head>
+
+<body>
+  <div id="particles"></div>
+  
+  <!-- Sidebar -->
+  <button class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="icon"><i class="fas fa-bolt"></i></div>
+      <div class="brand">X-XAVIERA <span>APPS </span></div>
+    </div>
+    
+    <div class="sidebar-nav">
+      <a href="#membership" class="sidebar-item">
+        <i class="fas fa-tags"></i>
+        <span>Plans</span>
+      </a>
+      <a href="#about" class="sidebar-item">
+        <i class="fas fa-info-circle"></i>
+        <span>About</span>
+      </a>
+      <a href="#contact-support" class="sidebar-item">
+        <i class="fas fa-headset"></i>
+        <span>Support</span>
+      </a>
+      <a href="/login" class="sidebar-item">
+        <i class="fas fa-sign-in-alt"></i>
+        <span>Login</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Welcome Section -->
+<section class="welcome">
+  <div class="welcome-content">
+    <h1 id="typing"></h1>
+    <p id="subtext">AlwAysRexz Project</p>
+  </div>
+</section>
+   
+
+<section id="about">
+  <div class="container">
+    
+    <!-- Left (sekarang di atas) -->
+    <div class="about-text">
+      <h2>About X-Xaviera</h2>
+      <p>
+        X-Xaviera adalah platform modern untuk mengelola akses API, key management,
+        dan layanan digital dengan sistem yang aman serta fleksibel.
+      </p>
+      <p>
+        Dibangun menggunakan teknologi terbaru, kami hadir untuk mendukung kebutuhan
+        pengguna mulai dari level User, Reseller, hingga Admin.
+      </p>
+    </div>
+
+    <!-- Right (sekarang di bawah, kiri kalau lebar) -->
+    <div class="about-features">
+      <div><i class="fa-solid fa-key"></i> Multi-level Key Management</div>
+      <div><i class="fa-solid fa-bolt"></i> High-performance API & Dashboard</div>
+      <div><i class="fa-solid fa-shield-halved"></i> Keamanan & Enkripsi Terjamin</div>
+      <div><i class="fa-solid fa-mobile-screen"></i> Responsive Design for All Devices</div>
+      <div><i class="fa-solid fa-cloud"></i> Cloud-based Infrastructure</div>
+    </div>
+
+  </div>
+</section>
+  
+<!-- Membership Section -->
+<section class="membership" id="membership">
+  <h2><i class="fa-solid fa-rocket"></i> Membership Plans</h2>
+  <div class="plan-container">
+    
+    <div class="plan">
+      <h3><i class="fa-solid fa-key"></i> User Key</h3>
+      <div class="price">Rp 20.000 <span>/Lifetime</span></div>
+      <ul>
+        <li><i class="fa-solid fa-check"></i> Full API Access</li>
+        <li><i class="fa-solid fa-check"></i> Daily Request Limit</li>
+        <li><i class="fa-solid fa-check"></i> Standard Support</li>
+        <li><i class="fa-solid fa-check"></i> Web Panel Login</li>
+      </ul>
+        <a href="https://t.me/AlwAysRexz?text=Haloo%20Asep,%20Saya%20ingin%20membeli%20User%20Key" class="btn" target="_blank">Beli Sekarang</a>
+    </div>
+
+    <div class="plan">
+      <h3><i class="fa-solid fa-gem"></i> Reseller Key</h3>
+      <div class="price">Rp 100.000 <span>/Lifetime</span></div>
+      <ul>
+        <li><i class="fa-solid fa-check"></i> Bulk Key Access</li>
+        <li><i class="fa-solid fa-check"></i> Higher Request Quota</li>
+        <li><i class="fa-solid fa-check"></i> Priority Support</li>
+        <li><i class="fa-solid fa-check"></i> Manage via Web Panel</li>
+      </ul>
+      <a href="https://t.me/AlwAysRexz?text=Haloo%20Asep,%20Saya%20ingin%20membeli%20Reseller%20Key" class="btn" target="_blank">Beli Sekarang</a>
+    </div>
+
+    <div class="plan">
+      <h3><i class="fa-solid fa-star"></i> Admin Key</h3>
+      <div class="price">Rp 180.000 <span>/Lifetime</span></div>
+      <ul>
+        <li><i class="fa-solid fa-check"></i> Unlimited Key Generation</li>
+        <li><i class="fa-solid fa-check"></i> Highest Request Quota</li>
+        <li><i class="fa-solid fa-check"></i> Exclusive Admin Panel</li>
+        <li><i class="fa-solid fa-check"></i> VIP Priority Support</li>
+      </ul>
+      <a href="https://t.me/AlwAysRexz?text=Haloo%20Asep,%20Saya%20ingin%20membeli%20Admin%20Key" class="btn" target="_blank">Beli Sekarang</a>
+    </div>
+
+    <div class="plan">
+      <h3><i class="fa-solid fa-crown"></i> Owners Key</h3>
+      <div class="price">Rp 250.000 <span>/Lifetime</span></div>
+      <ul>
+        <li><i class="fa-solid fa-check"></i> Master Key Access</li>
+        <li><i class="fa-solid fa-check"></i> Create User Key</li>
+        <li><i class="fa-solid fa-check"></i> Create Reseller Key</li>
+        <li><i class="fa-solid fa-check"></i> Create Admin Key</li>
+        <li><i class="fa-solid fa-check"></i> Full System Control</li>
+        <li><i class="fa-solid fa-check"></i> 24/7 Personal Support</li>
+      </ul>
+      <a href="https://t.me/AlwAysRexz?text=Haloo%20Asep,%20Saya%20ingin%20membeli%20Owners%20Key" class="btn" target="_blank">Beli Sekarang</a>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact-support">
+  <div class="contact-container">
+    
+    <!-- Kolom Kiri (Form) -->
+    <div class="contact-form">
+  <h2>Contact Support</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="text" id="username" placeholder="Your Username" required />
+    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="statusMsg"></p>
+</div>
+
+    <!-- Kolom Kanan (Teks Tambahan) -->
+    <div class="contact-text">
+  <h3>Butuh Bantuan?</h3>
+     <p>
+  Tim support kami hadir sebagai bagian penting dari layanan Xylent Empire,  
+  karena kami percaya bahwa dukungan yang baik adalah kunci dari pengalaman pengguna yang memuaskan.  
+  Melalui platform Telegram, kami menyediakan saluran komunikasi yang cepat, sederhana,  
+  dan selalu dapat diandalkan. Anda tidak perlu repot mengisi form yang rumit atau menunggu balasan email yang lama,  
+  cukup klik username Telegram kami dan Anda akan langsung terhubung dengan tim yang siap membantu.  
+</p>
+<p>
+  Klik username Telegram di bawah dan mulai percakapan dengan kami.
+</p>
+  <ul>
+  <li> <i class="fab fa-telegram"></i> <a href="https://t.me/AlwAysRexz" target="_blank">@XavieraAttck</a> </li>
+  </ul>
+</div>
+
+  </div>
+</section>
+</body>
+<!-- Scroll Logic -->
+ <script>
+  function scrollToCenter(event, sectionId) {
+    event.preventDefault(); // cegah scroll default anchor
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    // hitung posisi agar section pas di tengah viewport
+    const scrollPosition = sectionTop - (windowHeight / 2) + (sectionHeight / 2);
+
+    window.scrollTo({
+      top: scrollPosition,
+      behavior: "smooth"
+    });
+  }
+</script>
+
+<!-- Typing Logic -->
+ <script>
+  const text = "X-Xaviera Present";
+  let i = 0;
+
+  function typingEffect() {
+    if (i < text.length) {
+      document.getElementById("typing").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typingEffect, 100);
+    } else {
+      document.getElementById("typing").classList.add("glow");
+      setTimeout(() => {
+        document.getElementById("subtext").style.opacity = 1;
+      }, 800);
+    }
+  }
+
+  window.onload = typingEffect;
+</script>
+
+<!-- Contact Support Via Bot -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const BOT_TOKEN = "8370737204:AAFWkOI33vWG6BBKiTFF2yjIkG1ofHPl5nM";
+  const CHAT_ID = "6914240989"; // user id atau group id
+  const TELEGRAM_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const username = document.getElementById("username").value; // ganti email jadi username
+    const message = document.getElementById("message").value;
+
+    const text = `📩 *New Contact Form Message* \n\n👤 Name: ${name}\n🔗 Username: ${username}\n💬 Message: ${message}`;
+
+    fetch(TELEGRAM_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: text,
+        parse_mode: "Markdown"
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      Swal.fire({
+        title: "Pesan Berhasil Terkirim!",
+        text: "Terima kasih sudah menghubungi kami, tim akan segera merespons via Telegram.",
+        icon: "success",
+        background: "rgba(20,20,20,0.95)",
+        color: "#fff",
+        showConfirmButton: false,
+        timer: 7000,
+        customClass: {
+          popup: 'swal-custom-popup'
+        }
+      });
+      document.getElementById("contactForm").reset();
+    })
+    .catch(err => {
+      Swal.fire({
+        title: "❌ Gagal!",
+        text: "Pesan tidak dapat terkirim, coba lagi nanti.",
+        icon: "error",
+        background: "rgba(20,20,20,0.95)",
+        color: "#fff",
+        showConfirmButton: false,
+        timer: 5000
+      });
+      console.error(err);
+    });
+  });
+</script>
+
+<style>
+.swal-custom-popup {
+  border-radius: 20px !important;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7),
+              0 0 40px rgba(255, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+</style>
+
+</script>
+  <!-- Particleground Library -->
+  <script src="https://cdn.jsdelivr.net/gh/jnicol/particleground/jquery.particleground.min.js"></script>
+ <script> /*!
+ * Particleground
+ *
+ */
+ document.addEventListener('DOMContentLoaded', function () {
+  particleground(document.getElementById('particles'), {
+    dotColor: '#ff69b4',
+    lineColor: '#ff69b4'
+  });
+  var intro = document.getElementById('intro');
+  intro.style.marginTop = - intro.offsetHeight / 2 + 'px';
+}, false);
+
+
+
+;(function(window, document) {
+  "use strict";
+  var pluginName = 'particleground';
+
+  function extend(out) {
+    out = out || {};
+    for (var i = 1; i < arguments.length; i++) {
+      var obj = arguments[i];
+      if (!obj) continue;
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key] === 'object')
+            deepExtend(out[key], obj[key]);
+          else
+            out[key] = obj[key];
+        }
+      }
+    }
+    return out;
+  };
+
+  var $ = window.jQuery;
+
+  function Plugin(element, options) {
+    var canvasSupport = !!document.createElement('canvas').getContext;
+    var canvas;
+    var ctx;
+    var particles = [];
+    var raf;
+    var mouseX = 0;
+    var mouseY = 0;
+    var winW;
+    var winH;
+    var desktop = !navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i);
+    var orientationSupport = !!window.DeviceOrientationEvent;
+    var tiltX = 0;
+    var pointerX;
+    var pointerY;
+    var tiltY = 0;
+    var paused = false;
+
+    options = extend({}, window[pluginName].defaults, options);
+
+    /**
+     * Init
+     */
+    function init() {
+      if (!canvasSupport) { return; }
+
+      //Create canvas
+      canvas = document.createElement('canvas');
+      canvas.className = 'pg-canvas';
+      canvas.style.display = 'block';
+      element.insertBefore(canvas, element.firstChild);
+      ctx = canvas.getContext('2d');
+      styleCanvas();
+
+      // Create particles
+      var numParticles = Math.round((canvas.width * canvas.height) / options.density);
+      for (var i = 0; i < numParticles; i++) {
+        var p = new Particle();
+        p.setStackPos(i);
+        particles.push(p);
+      };
+
+      window.addEventListener('resize', function() {
+        resizeHandler();
+      }, false);
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+      }, false);
+
+      if (orientationSupport && !desktop) {
+        window.addEventListener('deviceorientation', function () {
+          // Contrain tilt range to [-30,30]
+          tiltY = Math.min(Math.max(-event.beta, -30), 30);
+          tiltX = Math.min(Math.max(-event.gamma, -30), 30);
+        }, true);
+      }
+
+      draw();
+      hook('onInit');
+    }
+
+    /**
+     * Style the canvas
+     */
+    function styleCanvas() {
+      canvas.width = element.offsetWidth;
+      canvas.height = element.offsetHeight;
+      ctx.fillStyle = options.dotColor;
+      ctx.strokeStyle = options.lineColor;
+      ctx.lineWidth = options.lineWidth;
+    }
+
+    /**
+     * Draw particles
+     */
+    function draw() {
+      if (!canvasSupport) { return; }
+
+      winW = window.innerWidth;
+      winH = window.innerHeight;
+
+      // Wipe canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update particle positions
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].updatePosition();
+      };
+      // Draw particles
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].draw();
+      };
+
+      // Call this function next time screen is redrawn
+      if (!paused) {
+        raf = requestAnimationFrame(draw);
+      }
+    }
+
+    /**
+     * Add/remove particles.
+     */
+    function resizeHandler() {
+      // Resize the canvas
+      styleCanvas();
+
+      var elWidth = element.offsetWidth;
+      var elHeight = element.offsetHeight;
+
+      // Remove particles that are outside the canvas
+      for (var i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].position.x > elWidth || particles[i].position.y > elHeight) {
+          particles.splice(i, 1);
+        }
+      };
+
+      // Adjust particle density
+      var numParticles = Math.round((canvas.width * canvas.height) / options.density);
+      if (numParticles > particles.length) {
+        while (numParticles > particles.length) {
+          var p = new Particle();
+          particles.push(p);
+        }
+      } else if (numParticles < particles.length) {
+        particles.splice(numParticles);
+      }
+
+      // Re-index particles
+      for (i = particles.length - 1; i >= 0; i--) {
+        particles[i].setStackPos(i);
+      };
+    }
+
+    /**
+     * Pause particle system
+     */
+    function pause() {
+      paused = true;
+    }
+
+    /**
+     * Start particle system
+     */
+    function start() {
+      paused = false;
+      draw();
+    }
+
+    /**
+     * Particle
+     */
+    function Particle() {
+      this.stackPos;
+      this.active = true;
+      this.layer = Math.ceil(Math.random() * 3);
+      this.parallaxOffsetX = 0;
+      this.parallaxOffsetY = 0;
+      // Initial particle position
+      this.position = {
+        x: Math.ceil(Math.random() * canvas.width),
+        y: Math.ceil(Math.random() * canvas.height)
+      }
+      // Random particle speed, within min and max values
+      this.speed = {}
+      switch (options.directionX) {
+        case 'left':
+          this.speed.x = +(-options.maxSpeedX + (Math.random() * options.maxSpeedX) - options.minSpeedX).toFixed(2);
+          break;
+        case 'right':
+          this.speed.x = +((Math.random() * options.maxSpeedX) + options.minSpeedX).toFixed(2);
+          break;
+        default:
+          this.speed.x = +((-options.maxSpeedX / 2) + (Math.random() * options.maxSpeedX)).toFixed(2);
+          this.speed.x += this.speed.x > 0 ? options.minSpeedX : -options.minSpeedX;
+          break;
+      }
+      switch (options.directionY) {
+        case 'up':
+          this.speed.y = +(-options.maxSpeedY + (Math.random() * options.maxSpeedY) - options.minSpeedY).toFixed(2);
+          break;
+        case 'down':
+          this.speed.y = +((Math.random() * options.maxSpeedY) + options.minSpeedY).toFixed(2);
+          break;
+        default:
+          this.speed.y = +((-options.maxSpeedY / 2) + (Math.random() * options.maxSpeedY)).toFixed(2);
+          this.speed.x += this.speed.y > 0 ? options.minSpeedY : -options.minSpeedY;
+          break;
+      }
+    }
+
+    /**
+     * Draw particle
+     */
+    Particle.prototype.draw = function() {
+  // === Titik Partikel ===
+  ctx.save();
+  ctx.shadowColor = '#ff69b4';      // Warna glow
+  ctx.shadowBlur = 16;               // Intensitas blur
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+
+  ctx.beginPath();
+  ctx.arc(
+    this.position.x + this.parallaxOffsetX,
+    this.position.y + this.parallaxOffsetY,
+    options.particleRadius / 2,
+    0,
+    Math.PI * 2,
+    true
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+
+  // === Garis Antar Partikel ===
+  ctx.save();
+  ctx.shadowColor = '#ff69b4';
+  ctx.shadowBlur = 16;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+
+  ctx.beginPath();
+  for (var i = particles.length - 1; i > this.stackPos; i--) {
+    var p2 = particles[i];
+
+    // Hitung jarak antar titik (Pythagoras)
+    var a = this.position.x - p2.position.x;
+    var b = this.position.y - p2.position.y;
+    var dist = Math.sqrt((a * a) + (b * b)).toFixed(2);
+
+    if (dist < options.proximity) {
+      ctx.moveTo(
+        this.position.x + this.parallaxOffsetX,
+        this.position.y + this.parallaxOffsetY
+      );
+
+      if (options.curvedLines) {
+        ctx.quadraticCurveTo(
+          Math.max(p2.position.x, p2.position.x),
+          Math.min(p2.position.y, p2.position.y),
+          p2.position.x + p2.parallaxOffsetX,
+          p2.position.y + p2.parallaxOffsetY
+        );
+      } else {
+        ctx.lineTo(
+          p2.position.x + p2.parallaxOffsetX,
+          p2.position.y + p2.parallaxOffsetY
+        );
+      }
+    }
+  }
+  ctx.stroke();
+  ctx.restore();
+};
+
+    /**
+     * Update particle position
+     */
+    Particle.prototype.updatePosition = function() {
+      if (options.parallax) {
+        if (orientationSupport && !desktop) {
+          // Map tiltX range [-30,30] to [0,winW]
+          pointerX = ((tiltX + 30) * winW) / 60;
+          // Map tiltY range [-30,30] to [0,winH]
+          pointerY = ((tiltY + 30) * winH) / 60;
+        } else {
+          pointerX = mouseX;
+          pointerY = mouseY;
+        }
+        // Calculate parallax offsets
+        this.parallaxOffsetX = (pointerX - (winW / 2)) * (this.layer / options.parallaxMultiplier);
+        this.parallaxOffsetY = (pointerY - (winH / 2)) * (this.layer / options.parallaxMultiplier);
+      }
+
+      var elWidth = element.offsetWidth;
+      var elHeight = element.offsetHeight;
+
+      // Add speed to particle position
+      this.position.x += this.speed.x;
+      this.position.y += this.speed.y;
+
+      // Apply boundary limits
+      if (this.position.x < 0 - options.particleRadius) {
+        this.position.x = elWidth + options.particleRadius;
+      }
+      if (this.position.x > elWidth + options.particleRadius) {
+        this.position.x = 0 - options.particleRadius;
+      }
+      if (this.position.y < 0 - options.particleRadius) {
+        this.position.y = elHeight + options.particleRadius;
+      }
+      if (this.position.y > elHeight + options.particleRadius) {
+        this.position.y = 0 - options.particleRadius;
+      }
+    }
+
+    /**
+     * Setter: particle stacking position
+     */
+    Particle.prototype.setStackPos = function(index) {
+      this.stackPos = index;
+    }
+
+    Plugin.prototype = {
+      init: init,
+      pause: pause,
+      start: start,
+    };
+
+    var plugin = new Plugin();
+
+    plugin.init();
+
+    // Expose public methods
+    return {
+      pause: plugin.pause,
+      start: plugin.start
+    }
+  }
+
+  window[pluginName] = function(elem, options) {
+    return new Plugin(elem, options);
+  };
+
+  window[pluginName].defaults = {
+    minSpeedX: 0.1,
+    maxSpeedX: 0.7,
+    minSpeedY: 0.1,
+    maxSpeedY: 0.7,
+    directionX: 'center',
+    directionY: 'center',
+    density: 10000,
+    dotColor: '#ff69b4',
+    lineColor: '#ff69b4',
+    particleRadius: 7,
+    lineWidth: 1,
+    curvedLines: false,
+    proximity: 100,
+    parallax: true,
+    parallaxMultiplier: 5,
+    onInit: function() {}
+  };
+
+  // nothing wrong with it ;)
+  console.log('Sasuke Crash');
+
+})(window, document);
+</script>
+<script>
+  // Sidebar toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    
+    sidebarToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth <= 768 && 
+          !sidebar.contains(event.target) && 
+          !sidebarToggle.contains(event.target) &&
+          sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+      }
+    });
+  });
+</script>
+</html>
